@@ -1,0 +1,25 @@
+crypto1.c is the source project file.
+The project is written using C99, and it can be compiled using any C compiler 
+supporting C99 like gcc,clang etc.
+
+The project has been tested on 
+1. Mac OS X Yosemite (compiler - Apple LLVM version 7.0.0 (clang-700.1.76)) and
+2. Ubuntu 12.04 (compiler - gcc 4.6.3)
+
+INTSRUCTIONS FOR MAC OS & LINUX(UBUNTU)
+   1. Place the source file(crypto1.c) in desired directory.
+   2. Compile using : gcc crypto1.c -lm -o crypto
+      Here crypto is the name of executable generated. You can give any other 
+      name if you want.
+      If only, gcc crypto1.c -lm is given , by default the name of binary 
+      generated is a.out
+   3. Run using : ./crypto
+   NOTE: both the compilation and execution command should be run from the 
+   same directory where crypto1.c is located.
+
+FOR WINDOWS AND OTHER PLATFORMS
+Compile and run according to your compiler. See your compiler 
+specifications/documents. The compiler should support C99.
+As long as the compiler supports C99, project should compile and run.
+
+
