@@ -13,57 +13,57 @@ int p4 = 0 ; // for showing trace of computing e
 int p5 = 0 ; // for showing trace of computing d
 int p6 = 0 ; // for showing trace of computing E(e,v)
 
-/**************************************************************************
+/*******************************************************************************
 *  FUNCTION : mod 
 *  INPUT : x , y
 *  OUTPUT : x modulo y
 *  DESCRIPTION : calculates x modulo y and returns the result
-**************************************************************************/
+*******************************************************************************/
 uint32_t mod (uint32_t x, uint32_t y) {
    return (x -(y * (x/y)));
 }
 
-/**************************************************************************
+/*******************************************************************************
 *  FUNCTION : set_bit 
 *  INPUT : number , position
 *  OUTPUT : number
 *  DESCRIPTION : sets bit(sets as 1) in 'number ' at position 'position' 
 *  and returns the number . 
-**************************************************************************/
+*******************************************************************************/
 // for the following LSB at position 0 and move towards MSB
 uint32_t set_bit (uint32_t number, uint32_t position) {
    return (number | (1 << position));
 }
 
-/**************************************************************************
+/*******************************************************************************
 *  FUNCTION : unset_bit 
 *  INPUT : number , position
 *  OUTPUT : number
 *  DESCRIPTION : unsets bit(sets as 0) in 'number ' at position 'position'
 *  and returns the number . 
-**************************************************************************/
+*******************************************************************************/
 uint32_t unset_bit (uint32_t number, uint32_t position) {
    return (number & (~(1 << position)));
 }
 
-/**************************************************************************
+/*******************************************************************************
 *  FUNCTION : get_bit 
 *  INPUT : number , position
 *  OUTPUT : number
 *  DESCRIPTION : fetches bit at position 'position' in 'number ' 
 *  and returns that bit . 
-**************************************************************************/
+*******************************************************************************/
 uint32_t get_bit (uint32_t number, uint32_t position) {
    return ((number & (1 << position)) >> position);
 }
 
-/**************************************************************************
+/*******************************************************************************
 *  FUNCTION : find_msb_one 
 *  INPUT : number 
 *  OUTPUT : position 
 *  DESCRIPTION : finds the position of the leftmost set bit 
 *  and returns the position . 
-**************************************************************************/
+*******************************************************************************/
 uint32_t find_msb_one (uint32_t number) {
    uint32_t position = 0;
    
@@ -73,23 +73,23 @@ uint32_t find_msb_one (uint32_t number) {
    return (position);
 }
 
-/**************************************************************************
+/*******************************************************************************
 *  FUNCTION : printbits 
 *  INPUT : a 1 byte number (v)
 *  OUTPUT : NONE
 *  DESCRIPTION : prints the binary represenation of a variable of size 1 byte 
-**************************************************************************/
+*******************************************************************************/
 void printbits(uint8_t v) {
   int i; 
   for(i = 7; i >= 0; i--) putchar('0' + ((v >> i) & 1));
 }
 
-/**************************************************************************
+/*******************************************************************************
 *  FUNCTION : print32bits 
 *  INPUT : a 4 byte number (v)
 *  OUTPUT : NONE
 *  DESCRIPTION : prints the binary represenation of a variable of size 4 byte 
-**************************************************************************/
+*******************************************************************************/
 void print32bits(uint32_t v) {
    printbits((v>>24)&0xff);
    printbits((v>>16)&0xff);
@@ -97,7 +97,7 @@ void print32bits(uint32_t v) {
    printbits((v)&0xff);
 }
 
-/**************************************************************************
+/*******************************************************************************
 *  FUNCTION : print_prime_trace 
 *  INPUT : candidate, a, line
 *  OUTPUT : returns 1 after printing prime, 0 for non prime
@@ -106,7 +106,7 @@ void print32bits(uint32_t v) {
 *  not prime and Line 126 is for prime. For not prime candidate, we have input 
 *  a for which test fails and we print the trace. For a prime candidate, we 
 *  have input a for which test succeeds and we print the trace. 
-**************************************************************************/
+*******************************************************************************/
 uint32_t print_prime_trace (uint32_t candidate, uint32_t a, uint32_t line) {
 
    uint32_t i ;
@@ -125,7 +125,8 @@ uint32_t print_prime_trace (uint32_t candidate, uint32_t a, uint32_t line) {
       for (j = (uint32_t)((log(candidate-1))/log(2)); j>=0; j--) {
          z = y;
          y = mod((y*y),candidate);
-         printf("j = %d, x = %d, z = %d, y1 = %d, ",j,get_bit((candidate-1),(uint32_t)j),z,y);
+         printf("j = %d, x = %d, z = %d, y1 = %d, ",j,get_bit((candidate-1),
+             (uint32_t)j),z,y);
          if ((y == 1) && (z != 1) && (z != (candidate - 1))) {
             flag = 0;
             break;
@@ -145,7 +146,8 @@ uint32_t print_prime_trace (uint32_t candidate, uint32_t a, uint32_t line) {
       if (flag == 0) printf("\n");
       printf("candidate :%d is not a prime because ",candidate);   
       if (flag == 0){
-         printf("%d mod %d = 1 and %d is not equal to 1 or %d\n",z,candidate,z,candidate-1);
+         printf("%d mod %d = 1 and %d is not equal to 1 or %d\n",
+             z,candidate,z,candidate-1);
       }
       else {
          printf("%d^%d mod %d != 1\n",a,candidate-1,candidate);   
@@ -154,14 +156,14 @@ uint32_t print_prime_trace (uint32_t candidate, uint32_t a, uint32_t line) {
    }
 }
 
-/**************************************************************************
+/*******************************************************************************
 *  FUNCTION : print_known_not_prime_trace 
 *  INPUT : None
 *  OUTPUT : None
 *  DESCRIPTION : finds a known non prime(we try all even numbers) for which 
 *  primality test fails, finds candidate, a and then calls 
 *  print_prime_trace to print the trace. 
-**************************************************************************/
+*******************************************************************************/
 void print_known_not_prime_trace () { 
 
    uint32_t i ;
@@ -209,13 +211,13 @@ void print_known_not_prime_trace () {
 }
 
 
-/**************************************************************************
+/*******************************************************************************
 *  FUNCTION : is_prime 
 *  INPUT : candidate that is to be checked 
 *  OUTPUT : 1 if candidate is prime else 0
 *  DESCRIPTION : uses Miller-Rabin Algo for primality testing for 
 *  different values of a(max 20).  
-**************************************************************************/
+*******************************************************************************/
 uint32_t is_prime (uint32_t candidate) { // using Miller-Rabin Algo
 
    uint32_t i ;
@@ -279,13 +281,13 @@ uint32_t is_prime (uint32_t candidate) { // using Miller-Rabin Algo
 }
 
 
-/**************************************************************************
+/*******************************************************************************
 *  FUNCTION : get_prime 
 *  INPUT : NONE
 *  OUTPUT : a prime number
 *  DESCRIPTION : chooses a candidate randomly, checks if its prime and  
 *  returns the prime on finding a successful candidate.  
-**************************************************************************/
+*******************************************************************************/
 uint32_t get_prime () {
    
    uint32_t candidate;
@@ -331,7 +333,7 @@ uint32_t get_prime () {
 
 } // end get_prime
 
-/**************************************************************************
+/*******************************************************************************
 *  FUNCTION : find_keys 
 *  INPUT : pointer to encryption key(e),pointer to decryption key(d),
 *  euler_value
@@ -339,7 +341,7 @@ uint32_t get_prime () {
 *  DESCRIPTION : uses the extended Euclidean Algo to find e and d, on finding  
 *  them updates the e and d pointers. If tried all values, still don't find
 *  a 'e' , return e=d=0  
-**************************************************************************/
+*******************************************************************************/
 void find_keys(uint32_t *e, uint32_t *d, uint32_t euler_value) {
    uint32_t i,k;
    uint32_t r1,r2,r3;
@@ -456,7 +458,7 @@ void find_keys(uint32_t *e, uint32_t *d, uint32_t euler_value) {
    return ;
 }
 
-/**************************************************************************
+/*******************************************************************************
 *  FUNCTION : generate_rsa 
 *  INPUT : pointer to prime1(p), pointer to prime2(q),pointer to n,
 *  pointer to euler_value,pointer to encryption key(e),
@@ -464,7 +466,7 @@ void find_keys(uint32_t *e, uint32_t *d, uint32_t euler_value) {
 *  OUTPUT : NONE
 *  DESCRIPTION : generates the RSA public/private cryptosystem and on finding   
 *  all parameters(p,q,n,euler_value,e,d) updates all pointers.  
-**************************************************************************/
+*******************************************************************************/
 void generate_rsa (uint32_t *p, uint32_t *q, uint32_t *n, \
                   uint32_t *euler_value, uint32_t *e, uint32_t *d) {
     
@@ -482,13 +484,13 @@ void generate_rsa (uint32_t *p, uint32_t *q, uint32_t *n, \
    return;
 }
 
-/**************************************************************************
+/*******************************************************************************
 *  FUNCTION : fast_exponentiation 
 *  INPUT : a, x, n
 *  OUTPUT :  y = (a raise to power x ) mod n
 *  DESCRIPTION : calculates y = (a raise to power x ) mod n using fast
 *  exponentiation and returns y  
-**************************************************************************/
+*******************************************************************************/
 uint32_t fast_exponentiation(a, x, n ) {
    
    int i ;
@@ -622,7 +624,6 @@ int main () {
       u = 0 ;
       u = set_bit(u,k-1);
       for (i = 0 ; i< (k-1); i++) {
-         
          j = rand();
          if (mod((uint32_t)j , 2) == 0) { // even number ; so LSB is 0
             u = unset_bit(u,i); // set ith bit in p as 0
@@ -640,7 +641,7 @@ int main () {
    print32bits(u);
    printf("\n");
   
-   h_u = ((u >> 24) & 0xff) ^((u >> 16) & 0xff) ^((u >> 8) & 0xff) ^ (u & 0xff) ;
+   h_u = ((u >> 24) & 0xff) ^((u >> 16) & 0xff) ^((u >> 8) & 0xff) ^ (u & 0xff);
    v = fast_exponentiation(h_u, d, n);  
    w = fast_exponentiation(v, e, n);
 
